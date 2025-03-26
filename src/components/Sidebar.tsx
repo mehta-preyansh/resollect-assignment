@@ -1,31 +1,36 @@
-import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import "../styles/sidebar.module.css";
 import { menuItems } from "../routes/menu";
-// import "./Sidebar.css";
+import logo from "../assets/logo_full_dark.svg";
+import SidebarItem from "./SidebarItem";
 
-const Sidebar = ({ onSelectTab }: { onSelectTab: (tab: string) => void }) => {
-  const [activeTab, setActiveTab] = useState("Portfolio");
-
-  const handleTabClick = (label: string) => {
-    setActiveTab(label);
-    onSelectTab(label);
-  };
-
+const Sidebar = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
   return (
-    <aside className="sidebar">
-      <nav>
-        <ul>
-          {menuItems.map(({ label }) => (
-            <li
-              key={label}
-              className={activeTab === label ? "active" : ""}
-              onClick={() => handleTabClick(label)}
+    <>
+      <aside
+        className={`z-0 fixed top-16 left-0 h-[calc(100vh-4rem)] w-64 bg-white border-r border-gray-200 justify-between flex flex-col p-4 transition-transform ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        } lg:translate-x-0 lg:w-72`}
+      >
+        <nav>
+          {menuItems.map((item) => (
+            <div
+              key={item.path}
+              className="block px-2 py-2 rounded-md transition-all"
+              onClick={onClose}
             >
-              {label}
-            </li>
+              <SidebarItem icon={item.icon} label={item.label} path={item.path}/>
+            </div>
           ))}
-        </ul>
-      </nav>
-    </aside>
+        </nav>
+        <div className="flex justify-center items-center space-x-2">
+          <p>powered by</p>
+          <Link to="/" aria-label="Resollect Home">
+            <img src={logo} alt="Resollect Logo" className="h-8" />
+          </Link>
+        </div>
+      </aside>
+    </>
   );
 };
 

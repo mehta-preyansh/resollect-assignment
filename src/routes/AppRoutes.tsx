@@ -8,13 +8,12 @@ const AppRoutes = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/portfolio" replace />} />
-
         <Route path="/" element={<DashboardLayout />}>
           {menuItems.map(({ path, component: Component }) => (
             <Route key={path} path={path} element={<Component />} />
           ))}
-          <Route path="*" element={<NotFoundPage />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
   );

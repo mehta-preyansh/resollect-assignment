@@ -1,26 +1,20 @@
-import { useState } from "react";
-import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
-import { menuItems } from "../routes/menu";
-// import "./DashboardLayout.css";
+import Header from "../components/Header";
+import { useState } from "react";
 
 const DashboardLayout = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [activeTab, setActiveTab] = useState(location.pathname);
-
-  const handleTabSelect = (label: string) => {
-    const selectedItem = menuItems.find((item) => item.label === label);
-    if (selectedItem) {
-      setActiveTab(selectedItem.path);
-      navigate(selectedItem.path);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const closeSidebar = () => {
+    if (isSidebarOpen) {
+      setIsSidebarOpen(false);
     }
   };
-
   return (
-    <div className="dashboard-layout">
-      <Sidebar onSelectTab={handleTabSelect} />
-      <main className="content">
+    <div className="dashboard-layout flex flex-col h-screen">
+      <Header onMenuClick={() => setIsSidebarOpen(!isSidebarOpen)} crossIcon={isSidebarOpen}/>
+      <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar}/>
+      <main className="content flex-grow p-4 overflow-auto lg:ml-72" onClick={closeSidebar}>
         <Outlet />
       </main>
     </div>
