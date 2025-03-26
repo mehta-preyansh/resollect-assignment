@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import fullLogo from "../assets/logo_full_dark.svg";
@@ -12,12 +12,25 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ onMenuClick, crossIcon }) => {
   const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 1024);
+  const dropdownRef = useRef<HTMLElement>(null);
 
   // Update state on window resize
   useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside, { signal });
+    window.addEventListener("resize", handleResize, { signal });
+    return () => controller.abort();
   }, []);
 
   const user = {
@@ -51,7 +64,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick, crossIcon }) => {
         </Link>
       </div>
 
-      <section className="relative">
+      <section className="relative" ref={dropdownRef}>
         <button
           className="flex items-center space-x-2"
           onClick={() => setDropdownOpen(!isDropdownOpen)}
@@ -71,7 +84,12 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick, crossIcon }) => {
             <span className="block text-xs text-gray-500">{user.email}</span>
           </div>
 
-          <ChevronDown size={18} className={`text-gray-600 transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : "rotate-0"}`} /> 
+          <ChevronDown
+            size={18}
+            className={`text-gray-600 transition-transform duration-300 ${
+              isDropdownOpen ? "rotate-180" : "rotate-0"
+            }`}
+          />
         </button>
 
         {isDropdownOpen && (
