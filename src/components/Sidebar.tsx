@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import "../styles/sidebar.module.css";
 import { menuItems } from "../routes/menu";
 import logo from "../assets/logo_full_dark.svg";
 import SidebarItem from "./SidebarNavButton";
