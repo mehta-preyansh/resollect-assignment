@@ -35,9 +35,6 @@ export const setupFiltersArray = (selectedTags: string[]) => {
       case "Recent":
         filterConditions["appliedDate"] = (date: string) => isRecent(date);
         break;
-      case "Closed":
-        filterConditions["status"] = "Closed";
-        break;
       case "Pending":
         filterConditions["status"] = "Pending";
         break;
