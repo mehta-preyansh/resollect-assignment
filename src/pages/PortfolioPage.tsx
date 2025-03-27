@@ -15,9 +15,8 @@ const PortfolioPage = () => {
   };
   const [selectedTags, setSelectedTags] = useState<string[]>(["All"]);
   const { chipTags, setFilters } = useLoanData();
-  
 
-  const updateUi = (tag: string) => {
+  const handleSelectTag = (tag: string) => {
     if (tag === "All") {
       setSelectedTags(["All"]);
     } else {
@@ -32,16 +31,12 @@ const PortfolioPage = () => {
     }
   };
 
-  const handleSelectTag = (tag: string) => {
-    updateUi(tag);
-    const filters = setupFiltersArray(selectedTags);
-    setFilters(filters);
-  };
-
   useEffect(() => {
     if (selectedTags.length === 0) {
       setSelectedTags(["All"]);
     }
+    const filters = setupFiltersArray(selectedTags);
+    setFilters(filters);
   }, [selectedTags]);
 
   useEffect(() => {

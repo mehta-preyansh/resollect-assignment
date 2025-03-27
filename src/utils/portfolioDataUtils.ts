@@ -12,7 +12,7 @@ const isRecent = (date: string) => {
   const today = new Date();
   const appliedDate = new Date(date);
   const diffInDays = (today.getTime() - appliedDate.getTime()) / (1000 * 3600 * 24);
-  return diffInDays <= 90;
+  return diffInDays <= 30;
 };
 
 export const setupFiltersArray = (selectedTags: string[]) => {
@@ -47,5 +47,4 @@ export const setupFiltersArray = (selectedTags: string[]) => {
   });
 
   return filterConditions;
-
 }

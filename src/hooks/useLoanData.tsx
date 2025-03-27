@@ -78,7 +78,7 @@ export const LoansDataProvider: React.FC<{ children: React.ReactNode }> = ({
       Object.entries(loan).every(([key, value]) => {
         if (filters[key]) {
           if (typeof filters[key] === "function") {
-            return filters[key](value) === value;
+            return filters[key](value);
           }
           return filters[key] === value;
         }
