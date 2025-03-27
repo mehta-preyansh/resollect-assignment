@@ -4,22 +4,22 @@ interface PrimaryButtonProps {
   icon?: React.ReactNode;
   label: string;
   onClick: () => void;
-  focusStateStatic?: boolean;
+  focused?: boolean;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   icon,
   label,
   onClick,
-  focusStateStatic = true,
+  focused = true,
 }) => {
   return (
     <button
       onClick={onClick}
       className={`primary-button flex items-center gap-2 ${
-        focusStateStatic
+        focused
           ? "bg-[#3761e2] text-white"
-          : "text-gray-300 hover:bg-gray-400"
+          : "text-gray-400 border border-gray-300"
       } rounded-md px-4 py-[6px] cursor-pointer`}
     >
       {icon}

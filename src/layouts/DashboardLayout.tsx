@@ -14,7 +14,7 @@ const DashboardLayout = () => {
     <div className="dashboard-layout flex flex-col h-screen">
       <Header onMenuClick={() => setIsSidebarOpen(!isSidebarOpen)} crossIcon={isSidebarOpen}/>
       <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar}/>
-      <main className="content flex-grow p-4 overflow-auto lg:ml-72" onClick={closeSidebar}>
+      <main className="content flex flex-col p-4 overflow-hidden lg:ml-72 flex-1" onClick={closeSidebar}>
         <Outlet />
       </main>
     </div>
