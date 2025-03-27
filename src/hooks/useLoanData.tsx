@@ -58,7 +58,7 @@ export const LoansDataProvider: React.FC<{ children: React.ReactNode }> = ({
 
       try {
         const response = await fetch(
-          "http://resollect-dummy-backend-production.up.railway.app"
+          "https://resollect-dummy-backend-production.up.railway.app"
         );
         const result = await response.json();
         sessionStorage.setItem("portfolioData", JSON.stringify(result));
