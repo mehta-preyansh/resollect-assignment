@@ -3,7 +3,6 @@ import { useLoanData } from "../hooks/useLoanData";
 import { formatLoanData } from "../utils/portfolioDataUtils";
 import { LoanHeaders } from "../constants";
 import { Loan } from "../types";
-import { useEffect } from "react";
 
 const LoanTable = () => {
   const { filteredLoans, loading, setSortConfig, sortConfig } = useLoanData();

@@ -27,7 +27,7 @@ const PortfolioPage = () => {
       if (updatedTags.length > 0) {
         updatedTags = updatedTags.filter((t) => t !== "All");
       }
-      setSelectedTags((prev) => [...updatedTags]);
+      setSelectedTags([...updatedTags]);
     }
   };
 
