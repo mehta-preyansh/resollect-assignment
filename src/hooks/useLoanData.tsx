@@ -13,6 +13,10 @@ const LoansDataContext = createContext<{
     direction: "asc" | "desc";
   }) => void;
   filters: { [key: string]: any };
+  sortConfig: {
+    key: string;
+    direction: "asc" | "desc";
+  } | null;
 }>({
   loans: [],
   filteredLoans: [],
@@ -22,6 +26,7 @@ const LoansDataContext = createContext<{
   setFilters: () => {},
   setSortConfig: () => {},
   filters: {},
+  sortConfig: null,
 });
 
 export const LoansDataProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -111,7 +116,8 @@ export const LoansDataProvider: React.FC<{ children: React.ReactNode }> = ({
         chipTags,
         setFilters,
         setSortConfig,
-        filters
+        filters,
+        sortConfig
       }}
     >
       {children}

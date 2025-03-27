@@ -8,8 +8,8 @@ import { setupFiltersArray } from "../utils/portfolioDataUtils";
 const PortfolioPage = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [sortingIndex, setSortingIndex] = useState("display");
-  const sortingOptions = {
+  const [optionIndex, setOptionIndex] = useState("display");
+  const options = {
     display: "Display Records",
     select: "Select Records",
   };
@@ -89,7 +89,7 @@ const PortfolioPage = () => {
               aria-expanded={isDropdownOpen}
             >
               <span>
-                {sortingOptions[sortingIndex as keyof typeof sortingOptions]}
+                {options[optionIndex as keyof typeof options]}
               </span>
 
               <ChevronDown
@@ -103,13 +103,13 @@ const PortfolioPage = () => {
               <button
                 className="absolute right-0 mt-2 w-full bg-white shadow-lg rounded-md p-2 cursor-pointer"
                 onClick={() => {
-                  setSortingIndex(
-                    sortingIndex === "display" ? "select" : "display"
+                  setOptionIndex(
+                    optionIndex === "display" ? "select" : "display"
                   );
                   setDropdownOpen(false);
                 }}
               >
-                {sortingIndex === "display"
+                {optionIndex === "display"
                   ? "Select Records"
                   : "Display Records"}
               </button>
